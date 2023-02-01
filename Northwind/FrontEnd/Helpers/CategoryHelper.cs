@@ -32,16 +32,16 @@ namespace FrontEnd.Helpers
 
         public CategoryViewModel Get(int id)
         {
-            CategoryViewModel lista;
+            CategoryViewModel Category;
 
 
             HttpResponseMessage responseMessage = ServiceRepository.GetResponse("api/category/" + id.ToString());
             var content = responseMessage.Content.ReadAsStringAsync().Result;
-            lista = JsonConvert.DeserializeObject<CategoryViewModel>(content);
+            Category = JsonConvert.DeserializeObject<CategoryViewModel>(content);
 
 
 
-            return lista;
+            return Category;
         }
 
 

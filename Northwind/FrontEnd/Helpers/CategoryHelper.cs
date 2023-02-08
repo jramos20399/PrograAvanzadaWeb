@@ -45,8 +45,60 @@ namespace FrontEnd.Helpers
         }
 
 
+        public CategoryViewModel Create(CategoryViewModel category) {
+
+
+            CategoryViewModel Category;
+
+
+            HttpResponseMessage responseMessage = ServiceRepository.PostResponse("api/category/" ,category);
+            var content = responseMessage.Content.ReadAsStringAsync().Result;
+            Category = JsonConvert.DeserializeObject<CategoryViewModel>(content);
+
+
+
+            return Category;
+        }
+
+
+        public CategoryViewModel Edit(CategoryViewModel category)
+        {
+
+
+            CategoryViewModel Category;
+
+
+            HttpResponseMessage responseMessage = ServiceRepository.PutResponse("api/category/", category);
+            var content = responseMessage.Content.ReadAsStringAsync().Result;
+            Category = JsonConvert.DeserializeObject<CategoryViewModel>(content);
+
+
+
+            return Category;
+        }
+
+
+
+        public CategoryViewModel Delete(int id)
+        {
+
+
+            CategoryViewModel Category;
+
+
+            HttpResponseMessage responseMessage = ServiceRepository.DeleteResponse("api/category/" + id.ToString());
+            var content = responseMessage.Content.ReadAsStringAsync().Result;
+            Category = JsonConvert.DeserializeObject<CategoryViewModel>(content);
+
+
+
+            return Category;
+        }
+
+    } 
+
 
 
 
     }
-}
+

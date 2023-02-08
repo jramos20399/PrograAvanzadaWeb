@@ -87,8 +87,10 @@ namespace BackEnd.Controllers
         [HttpPost]
         public JsonResult Post([FromBody] CategoryModel category)
         {
-            categoryDAL.Add(Convertir(category));
-            return new JsonResult(Convertir(category));
+
+            Category entity = Convertir(category);
+            categoryDAL.Add(entity);
+            return new JsonResult(Convertir(entity));
 
         }
 

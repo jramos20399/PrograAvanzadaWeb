@@ -45,7 +45,7 @@ namespace FrontEnd.Controllers
                 categoryHelper = new CategoryHelper();
                  category = categoryHelper.Create(category);
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", new {id=category.CategoryID});
             }
             catch
             {

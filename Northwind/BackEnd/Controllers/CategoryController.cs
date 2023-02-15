@@ -12,8 +12,11 @@ namespace BackEnd.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-
+        private readonly ILogger<CategoryController> logger;
         private ICategoryDAL categoryDAL;
+
+
+
 
         #region Convertir
         private CategoryModel Convertir(Category entity)
@@ -43,10 +46,10 @@ namespace BackEnd.Controllers
         #endregion
 
         #region Constructor
-        public CategoryController()
+        public CategoryController(ILogger<CategoryController> logger)
         {
             categoryDAL = new CategoryDALImpl(new Entities.Entities.NorthWindContext());
-
+            this.logger = logger;
         }
         #endregion
 
@@ -55,6 +58,8 @@ namespace BackEnd.Controllers
         [HttpGet]
         public JsonResult Get()
         {
+
+            logger.LogDebug("Ingreso a Get All Categories ");
             IEnumerable<Category> categories = categoryDAL.GetAll();
 
             List<CategoryModel> lista = new List<CategoryModel>();

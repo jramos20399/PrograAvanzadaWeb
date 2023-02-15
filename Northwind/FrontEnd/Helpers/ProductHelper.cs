@@ -29,5 +29,40 @@ namespace FrontEnd.Helpers
             return lista;
 
         }
+
+
+
+
+        public ProductViewModel Get(int id)
+        {
+            ProductViewModel ProductViewModel;
+
+
+            HttpResponseMessage responseMessage = ServiceRepository.GetResponse("api/product/" + id.ToString());
+            var content = responseMessage.Content.ReadAsStringAsync().Result;
+            ProductViewModel = JsonConvert.DeserializeObject<ProductViewModel>(content);
+
+
+
+            return ProductViewModel;
+        }
+
+
+        public ProductViewModel Create(ProductViewModel product)
+        {
+
+
+            ProductViewModel ProductViewModel;
+
+
+            HttpResponseMessage responseMessage = ServiceRepository.PostResponse("api/product/", product);
+            var content = responseMessage.Content.ReadAsStringAsync().Result;
+            ProductViewModel = JsonConvert.DeserializeObject<ProductViewModel>(content);
+
+
+
+            return ProductViewModel;
+        }
+
     }
 }

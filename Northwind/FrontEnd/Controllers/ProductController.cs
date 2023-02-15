@@ -8,6 +8,8 @@ namespace FrontEnd.Controllers
     public class ProductController : Controller
     {
         private ProductHelper productHelper;
+        private CategoryHelper categoryHelper;
+        private SupplierHelper supplierHelper;
 
         public ProductController()
         {
@@ -31,7 +33,14 @@ namespace FrontEnd.Controllers
         // GET: ProductController/Create
         public ActionResult Create()
         {
-            return View();
+            supplierHelper= new SupplierHelper();
+            categoryHelper= new CategoryHelper();
+            ProductViewModel product = new ProductViewModel();
+            product.Categories = categoryHelper.GetAll();
+            product.Suppliers= supplierHelper.GetAll();
+
+
+            return View(product);
         }
 
         // POST: ProductController/Create

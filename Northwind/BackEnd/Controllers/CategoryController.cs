@@ -58,18 +58,28 @@ namespace BackEnd.Controllers
         [HttpGet]
         public JsonResult Get()
         {
+            try
+            {
+                logger.LogDebug("Ingreso a Get All Categories ");
+                IEnumerable<Category> categories = categoryDAL.GetAll();
 
-            logger.LogDebug("Ingreso a Get All Categories ");
-            IEnumerable<Category> categories = categoryDAL.GetAll();
+                List<CategoryModel> lista = new List<CategoryModel>();
 
-            List<CategoryModel> lista = new List<CategoryModel>();
+                foreach (var category in categories)
+                {
+                    lista.Add(Convertir(category)
 
-            foreach (var category in categories) {
-                lista.Add(Convertir(category)                       
-                    
-                    );
+                        );
+                }
+                return new JsonResult(lista);
             }
-            return new JsonResult(lista);
+            catch (Exception e)
+            {
+                logger.LogError("");
+                return new JsonResult(null);
+            }
+
+           
         }
 
         // GET api/<CategoryController>/5

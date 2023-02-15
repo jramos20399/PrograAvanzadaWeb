@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 builder.Host.UseSerilog((ctx, lc)=> lc
-    .WriteTo.Console()
+    .WriteTo.File("logs/LogsBackEnd.txt", rollingInterval: RollingInterval.Day)
     .MinimumLevel.Debug()
     );
 

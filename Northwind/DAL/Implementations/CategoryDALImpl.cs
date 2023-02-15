@@ -77,7 +77,7 @@ namespace DAL.Implementations
                 {
                     categories = unidad.genericDAL.GetAll();
                 }
-                return categories;
+                return null;
             }
             catch (Exception)
             {

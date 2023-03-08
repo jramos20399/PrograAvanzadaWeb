@@ -1,6 +1,20 @@
+using Entities.Entities;
+using Entities.Utilities;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+#region ConnectionString
+
+builder.Services.AddDbContext<NorthWindContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+// Add services to the container.
+string connString = builder.Configuration.GetConnectionString("DefaultConnection");
+Util.ConnectionString = connString;
+
+
+#endregion
 
 #region Serilog
 builder.Logging.ClearProviders();
